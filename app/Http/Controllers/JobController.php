@@ -70,6 +70,37 @@ class JobController extends Controller
     
         return redirect()->route('jobs.index')->with('success', 'Job posted successfully!');
     }
+
+    use Illuminate\Http\Request;
+
+public function apply(Request $request, Job $job)
+{
+    // Example logic to associate the authenticated user with the job
+    $user = auth()->user();
+
+    // Check if already applied (optional)
+    if ($user->appliedJobs()->where('job_id', $job->id)->exists()) {
+        return back()->withErrors(['message' => 'You have already applied for this job.']);
+    }
+
+    // Save application (you might need to adjust this logic to fit your models)
+    $user->appliedJobs()->attach($job->id, [
+        'cover_letter' => $request->input('cover_letter'),
+        // Handle file uploads if any
+    ]);
+
+    return redirect()->route('jobs.index')->with('success', 'Application submitted successfully.');
+}
+
+
+
+    public function showApplicationForm(Job $job)
+{
+    return Inertia::render('JobApplyPage', [
+        'job' => $job,
+    ]);
+}
+
     
 }
 

@@ -10,6 +10,8 @@ Route::post('/post-job', [JobController::class, 'store'])->middleware('auth')->n
 Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])
 ->middleware(['auth', 'can:apply,job'])
 ->name('jobs.apply');
+Route::get('/jobs/{job}/apply', [JobController::class, 'showApplicationForm'])->name('jobs.showApplyForm');
+Route::post('/jobs/{job}/apply', [JobController::class, 'apply'])->name('jobs.apply');
 
 
 Route::get('/post-job', function () {
@@ -37,5 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';

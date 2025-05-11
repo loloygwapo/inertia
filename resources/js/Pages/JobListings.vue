@@ -3,7 +3,12 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { usePage, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
+const goToApplyPage = (jobId) => {
+  router.visit(route('jobs.showApplyForm', jobId));
+};
+
 const { jobs, appliedJobIds = [] } = usePage().props;
+
 const appliedIds = ref(appliedJobIds);
 
 const apply = (jobId) => {
@@ -42,7 +47,7 @@ const paginate = (page) => {
           </div>
 
           <button 
-            @click="apply(job.id)" 
+           @click="goToApplyPage(job.id)" 
             :disabled="appliedIds.includes(job.id)"
             :class="appliedIds.includes(job.id)
               ? 'opacity-50 cursor-not-allowed bg-gray-400 text-gray-700'

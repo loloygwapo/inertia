@@ -49,4 +49,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(JobApplication::class);
     }
+public function appliedJobs()
+{
+    return $this->belongsToMany(Job::class, 'job_applications');
+}
+
+
 }

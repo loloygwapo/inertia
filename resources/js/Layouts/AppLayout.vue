@@ -17,7 +17,7 @@
                     <Link href="/profile" class="text-white">Profile</Link>
                 </li>
                 <li>
-                    <Link href="/logout" class="text-white">Logout</Link>
+                    <Link href="/welcome" class="text-white">Logout</Link>
                 </li>
             </ul>
         </div>
