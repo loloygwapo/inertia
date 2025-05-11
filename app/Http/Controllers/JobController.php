@@ -71,8 +71,6 @@ class JobController extends Controller
         return redirect()->route('jobs.index')->with('success', 'Job posted successfully!');
     }
 
-    use Illuminate\Http\Request;
-
 public function apply(Request $request, Job $job)
 {
     // Example logic to associate the authenticated user with the job
